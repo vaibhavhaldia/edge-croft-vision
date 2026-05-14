@@ -14,7 +14,7 @@ dist/
 .ipynb_checkpoints/
 .DS_Store
 .vscode/
-.claude/
+.claude/**
 
 # virtualenv
 venv/
