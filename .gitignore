@@ -1,0 +1,78 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+build/
+dist/
+.eggs/
+*.egg-info/
+.installed.cfg
+.ipynb_checkpoints/
+.DS_Store
+.vscode/
+
+# virtualenv
+venv/
+
+# local env
+.env
+
+# macOS
+.DS_Store
+
+# Data files and datasets
+data/**
+!data/.gitkeep
+!data/README.md
+
+# Common data formats
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.db
+*.sqlite
+*.sqlite3
+
+# Image datasets
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.tif
+
+# Large model files
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.onnx
+*.pb
+*.model
+*.h5
+
+# Dataset archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Figures and outputs
+figures/**
+!figures/.gitkeep
+
+# Model checkpoints
+models/**
+!models/README.md
+!models/.gitkeep
