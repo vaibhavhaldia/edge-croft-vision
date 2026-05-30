@@ -1,327 +1,353 @@
-<!-- # edge-croft-vision
+# 🌿 Edge-Croft Vision
 
-LOT of classical computer vision before deep learning relied on:
+## Plant Disease Classification, Explainability Analysis, and Edge Deployment Research
 
-    thresholding
-    clustering
-    morphology
-    segmentation
 
 ---
 
-CNNs themselves internally learn:
+# Abstract
 
-hierarchical segmentation-like behavior.
+This repository investigates plant disease classification through a progression of classical computer vision, convolutional neural networks, transfer learning, explainability techniques, and deployment-oriented optimization.
 
-Early CNN filters often become:
+The work is structured as a series of experiments rather than a single model-training exercise. The objective is to understand how disease information emerges across multiple representations: handcrafted features, unsupervised segmentation, deep feature extraction, and explainability mechanisms.
 
-    edge detectors
-    color region detectors
-    texture separators
+The project currently covers:
 
-So your KMeans experiment becomes:
-“Can classical segmentation help modern CNNs?” -->
+* Exploratory visual analysis
+* Manual CNN operations
+* K-Means disease segmentation
+* CNN training from scratch
+* MobileNetV2 transfer learning
+* Grad-CAM explainability
+* Quantization research
+* Edge deployment architecture design
 
-# 🌿 Edge-Croft-Vision
+Dataset:
 
-### *Plant Disease Classification with Explainable Edge AI*
-
-> “Because crops deserve observability too.”
+* PlantVillage-derived dataset
+* 87,900 RGB images
+* 38 disease classes
 
 ---
 
-## 🚜 What is this?
+# Results Snapshot
 
-**Edge-Croft-Vision** is an end-to-end **Explainable Edge AI pipeline** for plant disease classification built using:
+| Metric               | Value         |
+| -------------------- | ------------- |
+| Dataset Size         | 87,900 Images |
+| Classes              | 38            |
+| Input Resolution     | 128×128       |
+| Custom CNN Accuracy  | 96.19%        |
+| MobileNetV2 Accuracy | 96.37%        |
+| Macro F1 Score       | 0.96          |
+| Model Size           | 8.67 MB       |
+| Trainable Parameters | 48,678        |
+| Inference Throughput | 192.55 FPS    |
 
-* 📷 Edge imaging (`ESP32-CAM`)
-* 🧠 Deep Learning (`MobileNetV2`, Custom CNNs)
-* 🔥 Explainability (`Grad-CAM`)
-* 🌐 Distributed inference (`Raspberry Pi`)
-* 📊 Observability (`Prometheus + Grafana`)
-* ⚡ Edge optimization (`Quantization`, lightweight inference)
+---
 
-The project goes beyond:
+## Training Dynamics
+
+The MobileNetV2 model converged rapidly and achieved stable validation performance while maintaining a comparatively small trainable parameter count.
+
+---
+
+## Confusion Matrix
+
+Class-level analysis reveals strong overall separability with a small number of visually similar disease classes remaining challenging.
+
+---
+
+# Research Objectives
+
+This repository investigates the following questions:
+
+### 1. Classical Vision vs Deep Learning
+
+Can disease-relevant information be detected using handcrafted computer vision techniques before introducing deep learning?
+
+### 2. Segmentation Before Classification
+
+Can unsupervised clustering isolate disease regions without labels?
+
+### 3. Explainability
+
+Do Grad-CAM activation maps correspond to visible pathological regions?
+
+### 4. Efficiency
+
+What accuracy-efficiency trade-offs emerge when transitioning toward deployment-oriented architectures?
+
+### 5. Edge Deployment
+
+What architectural changes are required to move from notebook experiments to deployable systems?
+
+---
+
+# Methodology
+
+The project follows a staged progression.
 
 ```text
-train model → get accuracy → submit PDF
+Dataset
+   │
+   ▼
+EDA & Feature Analysis
+   │
+   ▼
+Manual CNN Operations
+   │
+   ▼
+K-Means Segmentation
+   │
+   ▼
+Custom CNN
+   │
+   ▼
+MobileNetV2
+   │
+   ▼
+Grad-CAM
+   │
+   ▼
+Quantization Research
+   │
+   ▼
+Edge Deployment Design
 ```
 
-Instead, it explores:
+Rather than treating the final model as the primary artifact, each stage is evaluated independently to understand its contribution.
+
+---
+
+# Architecture Evolution
 
 ```text
-computer vision
-+ edge AI
-+ explainability
-+ systems engineering
-+ deployment architecture
-+ observability
+Notebook 01
+Exploratory Analysis
+        │
+        ▼
+Notebook 02
+Manual CNN Foundations
+        │
+        ▼
+Notebook 03
+K-Means Segmentation
+        │
+        ▼
+Notebook 04
+Custom CNN Training
+        │
+        ▼
+Notebook 05
+MobileNetV2 + Grad-CAM
+        │
+        ▼
+Notebook 06
+Edge Deployment Pipeline (ongoing)
 ```
 
 ---
 
-# 🧠 Project Philosophy
+# Experimental Findings
 
-Most ML projects stop at:
+## Finding 1
 
-```python
-model.fit(X, y)
+Disease regions exhibit measurable color-space separation before supervised learning.
+
+Observed through:
+
+* RGB analysis
+* HSV analysis
+* K-Means clustering
+
+---
+
+## Finding 2
+
+K-Means segmentation can isolate lesion regions without class labels.
+
+This demonstrates that disease information is partially recoverable from geometric structure in feature space alone.
+
+---
+
+## Finding 3
+
+Transfer learning provides a better accuracy-to-complexity ratio than the custom CNN architecture.
+
+| Model       | Accuracy |
+| ----------- | -------- |
+| Custom CNN  | 96.19%   |
+| MobileNetV2 | 96.37%   |
+
+---
+
+## Finding 4
+
+Grad-CAM activation maps frequently align with visible lesion regions.
+
+This suggests the model is learning disease-relevant structures rather than relying exclusively on background artifacts.
+
+---
+
+# Disease Localization
+
+K-Means clustering provides an interpretable view of disease region separation before supervised learning is introduced.
+
+---
+
+# Explainability Analysis
+
+## Grad-CAM Visualization
+
+Grad-CAM was used to inspect model attention regions.
+
+The workflow:
+
+```text
+Input Image
+      │
+      ▼
+Forward Pass
+      │
+      ▼
+Target Class
+      │
+      ▼
+Gradient Extraction
+      │
+      ▼
+Activation Weighting
+      │
+      ▼
+Heatmap Overlay
 ```
 
-This one asks:
-
-* What happens on constrained hardware?
-* Can the model explain itself?
-* What if WiFi drops?
-* How fast is inference?
-* How much RAM does deployment consume?
-* Can agriculture systems become observable infrastructure?
+The objective is not merely to produce predictions, but to inspect the spatial evidence supporting those predictions.
 
 ---
 
-# 🌱 Core Idea
+# Notebook Series
 
-A crop image is captured using an `ESP32-CAM`.
+* RGB analysis
+* HSV analysis
+* Texture analysis
+* Histogram analysis
+* Disease severity estimation
 
-The image is transmitted over WiFi to a `Raspberry Pi 4B`, where:
+- Manual convolution
+- Pooling
+- Feature extraction
+- CNN intuition
 
-* disease classification runs,
-* Grad-CAM heatmaps are generated,
-* inference metrics are logged,
-* system telemetry is monitored live.
+* HSV segmentation
+* K-Means clustering
+* Contour extraction
+* Lesion localization
 
-Because apparently even tomatoes deserve MLOps.
+- CNN training from scratch
+- Performance evaluation
+- Confusion matrix analysis
+
+* Transfer learning
+* Explainability
+* Benchmarking
+* Quantization analysis
+
+Current work:
+
+* ESP32-CAM integration
+* Laptop inference pipeline
+* Quantized deployment
+* Monitoring architecture
 
 ---
 
-# 🏗️ System Architecture
+# Current Deployment Direction
+
+Current deployment research is based on:
 
 ```text
 ESP32-CAM
-    ↓
-WiFi Image Streaming
-    ↓
-FastAPI / Flask Server
-    ↓
-MobileNetV2 Inference
-    ↓
-Grad-CAM Explainability
-    ↓
-Prometheus Metrics
-    ↓
-Grafana Dashboard
+      │
+      ▼
+UART / Streaming Interface
+      │
+      ▼
+Laptop Inference Service
+      │
+      ▼
+MobileNetV2
+      │
+      ▼
+Grad-CAM
+      │
+      ▼
+Metrics Collection
 ```
 
----
-
-# 🔬 Major Engineering Areas Covered
-
-| Domain                    | Covered |
-| ------------------------- | ------- |
-| Classical Computer Vision | ✅       |
-| CNNs from Scratch         | ✅       |
-| Transfer Learning         | ✅       |
-| Explainable AI            | ✅       |
-| Edge AI                   | ✅       |
-| Distributed Inference     | ✅       |
-| Observability Engineering | ✅       |
-| Quantization Theory       | ✅       |
-| Failure Analysis          | ✅       |
-| Deployment Systems        | ✅       |
+Raspberry Pi deployment remains a future extension and is not part of the current implementation.
 
 ---
 
-# 📚 Notebook Progression
+# Limitations
 
-## `01_EDA_and_visualization.ipynb`
+Current limitations include:
 
-### *“Know thy pixels.”*
-
-* RGB/HSV analysis
-* lesion distribution
-* texture analysis
-* disease severity estimation
-* class imbalance analysis
-
----
-
-## `02_manual_convolution_and_pooling.ipynb`
-
-### *Convolution without emotional support from PyTorch.*
-
-* manual convolution
-* pooling
-* manual backpropagation
-* CNN intuition
-* overfitting analysis
+* Controlled dataset conditions
+* PlantVillage-style imagery
+* Single-image classification
+* No temporal crop monitoring
+* No field deployment validation
+* Quantization benchmarking still ongoing
+* Explainability evaluation remains qualitative
 
 ---
 
-## `03_kmeans_segmentation.ipynb`
+# Ongoing Work
 
-### *Unsupervised learning enters the farm.*
-
-* KMeans clustering
-* HSV segmentation
-* contour extraction
-* lesion isolation
-* disease localization
-
----
-
-## `04_custom_cnn_training.ipynb`
-
-### *Building CNNs the hard way so future debugging hurts less.*
-
-* custom CNN architecture
-* training pipeline
-* confusion matrix analysis
-* failure analysis
-* overfitting mitigation
-
----
-
-## `05_mobilenet_transfer_learning.ipynb`
-
-### *Tiny model. Big ambitions.*
-
-* transfer learning
-* MobileNetV2
-* Grad-CAM
-* benchmarking
-* quantization theory
-* edge AI analysis
-
----
-
-## `06_edge_deployment_pipeline.ipynb` *(ongoing)*
-
-### *Where ML becomes infrastructure.*
-
-Planned:
-
-* FastAPI inference server
-* ESP32 integration
-* inference APIs
-* Grad-CAM endpoints
-* Prometheus metrics
-* Grafana dashboards
-* deployment architecture
-* edge optimization
-
----
-
-# 🔥 Explainability Matters
-
-This project does not blindly trust predictions.
-
-Using **Grad-CAM**, the system visualizes:
-
-> *what the model actually looked at before making a decision.*
-
-Because:
-
-```text
-99% accuracy
-without interpretability
-is just statistically confident guessing.
-```
-
----
-
-# ⚡ Edge AI Focus
-
-The deployment stack is optimized for constrained hardware:
-
-* Raspberry Pi inference
-* MobileNet lightweight deployment
-* quantization-aware engineering
-* reduced compute footprint
-* low-memory inference strategies
-
----
-
-# 📊 Observability Layer
-
-If your AI system crashes silently,
-you do not have intelligence.
-
-You have optimism.
-
-This project integrates:
-
-* Prometheus metrics
-* Grafana dashboards
-* inference latency monitoring
-* CPU/RAM tracking
-* deployment telemetry
-
----
-
-# 🧪 Current Research Directions
+Current areas of investigation:
 
 * FP32 vs INT8 benchmarking
-* edge latency optimization
-* lightweight explainability
-* deployment resilience
-* defensive inference engineering
-* resource-aware AI pipelines
+* TFLite conversion
+* Quantized inference
+* ESP32-CAM integration
+* Deployment architecture
+* Inference monitoring
+* Edge observability
 
 ---
 
-# 🛠️ Planned Tech Stack
-
-| Component    | Technology      |
-| ------------ | --------------- |
-| Edge Camera  | ESP32-CAM       |
-| Edge Server  | Raspberry Pi 4B |
-| Backend API  | FastAPI / Flask |
-| DL Framework | PyTorch         |
-| Edge Runtime | TFLite          |
-| Monitoring   | Prometheus      |
-| Dashboard    | Grafana         |
-
----
-
-# 🚀 Why This Project Exists
-
-To explore a simple question:
-
-> Can deep learning systems become lightweight, explainable, observable, and deployable enough for real-world agriculture?
-
-Also because training another ResNet on Kaggle without deployment felt spiritually incomplete.
-
----
-
-# 📷 Future Extensions
-
-* live edge streaming
-* TensorRT optimization
-* TinyML exploration
-* mobile deployment
-* multi-crop support
-* anomaly detection
-* federated agricultural learning
-* drone integration
-
----
-
-# 🧠 Hidden Lesson of This Project
-
-The hardest part of AI is rarely:
+# Repository Structure
 
 ```text
-making predictions
-```
-
-The hardest part is:
-
-```text
-building systems that survive reality.
+edge-croft-vision/
+│
+├── assets/
+│   ├── mobilenet_training_curve.png
+│   ├── confusion_matrix.png
+│   ├── gradcam_example.png
+│   └── kmeans_segmentation.png
+│
+├── notebooks/
+│   ├── 01_EDA_and_visualization.ipynb
+│   ├── 02_manual_convolution_and_pooling.ipynb
+│   ├── 03_kmeans_segmentation.ipynb
+│   ├── 04_custom_cnn_training.ipynb
+│   ├── 05_mobilenet_transfer_learning.ipynb
+|   |── WORK IN PROGRESS (DEPLOYMENT+TESTING)
+│       └── 06_edge_deployment_pipeline.ipynb
+│
+└── README.md
 ```
 
 ---
 
-# 🌾 Edge-Croft-Vision
+# References
 
-### *Where agriculture meets computer vision, edge computing, and systems engineering.*
+* Hughes, D. P., & Salathé, M. (2015). PlantVillage Dataset
+* Sandler et al. (2018). MobileNetV2: Inverted Residuals and Linear Bottlenecks
+* Selvaraju et al. (2017). Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization
+* PyTorch Documentation
+* OpenCV Documentation
+* Scikit-Learn Documentation
