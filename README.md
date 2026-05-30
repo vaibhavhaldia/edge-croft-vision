@@ -1,6 +1,6 @@
 # 🌿 Edge-Croft Vision
 
-<img width="240" height="480" alt="image" src="https://github.com/user-attachments/assets/cc132291-0b45-470c-a045-3edd0bb847dd" /> || <img width="240" height="480" alt="contact_sheet_1" src="https://github.com/user-attachments/assets/8bd0967c-e477-48aa-af83-91f11e3311bc" />
+<img width="240" height="480" alt="image" src="https://github.com/user-attachments/assets/cc132291-0b45-470c-a045-3edd0bb847dd" /> | <img width="240" height="480" alt="contact_sheet_1" src="https://github.com/user-attachments/assets/8bd0967c-e477-48aa-af83-91f11e3311bc" /> | ![alt text](image.png)
 
 
 
